@@ -1,5 +1,6 @@
-﻿using Alura.Adopet.Console.Servicos.Http;
-using Alura.Adopet.Console.Servicos.Arquivos;
+﻿using Alura.Adopet.Console.Servicos.Arquivos;
+using Alura.Adopet.Console.Servicos.Http;
+using System.Reflection;
 
 namespace Alura.Adopet.Console.Comandos;
 
@@ -12,26 +13,14 @@ public static class ComandosFactory
             return null;
         }
         var comando = argumentos[0];
-        switch (comando)
-        {
-            case "import":
-                var httpClientPet = new HttpClientPet(new AdopetAPIClientFactory().CreateClient("adopet"));
-                var leitorDeArquivos = new LeitorDeArquivo(argumentos[1]);
-                return new Import(httpClientPet, leitorDeArquivos);
+        Type? tipoRetornado = Assembly.GetExecutingAssembly().GetTipoComando(comando);
 
-            case "list":
-                var httpClientPetList = new HttpClientPet(new AdopetAPIClientFactory().CreateClient("adopet"));
-                return new List(httpClientPetList);
+        var listaDeFabricas = Assembly.GetExecutingAssembly().GetFabricas();
 
-            case "show":
-                var leitorDeArquivosShow = new LeitorDeArquivo(argumentos[1]);
-                return new Show(leitorDeArquivosShow);
+        var fabrica = listaDeFabricas.FirstOrDefault(f => f!.ConsegueCriarOTipo(tipoRetornado));
 
-            case "help":
-                var comandoASerExibido = argumentos.Length==2? argumentos[1] : null;
-                return new Help(comandoASerExibido);
+        if (fabrica is null) return null;
 
-            default: return null;
-        }           
+        return fabrica.CriarComando(argumentos);          
     }
 }

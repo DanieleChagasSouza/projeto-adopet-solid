@@ -2,6 +2,7 @@
 using Alura.Adopet.Console.Modelos;
 using Alura.Adopet.Console.Results;
 using Alura.Adopet.Testes.Builder;
+using Alura.Adopet.TestesIntegracao.Builder;
 
 namespace Alura.Adopet.Testes.Comandos;
 

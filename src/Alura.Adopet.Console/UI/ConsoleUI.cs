@@ -38,7 +38,19 @@ namespace Alura.Adopet.Console.UI
                 case SuccessWithDocs d:
                     ExibeDocumentacao(d);
                     break;
+                case SuccessWithClientes c:
+                    ExibeClientes(c);
+                    break;
             }
+        }
+
+        private static void ExibeClientes(SuccessWithClientes clientes)
+        {
+            foreach (var pet in clientes.Data)
+            {
+                System.Console.WriteLine(pet);
+            }
+            System.Console.WriteLine(clientes.Message);
         }
 
         private static void ExibeDocumentacao(SuccessWithDocs documentacaoComando)

@@ -5,11 +5,15 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <UserSecretsId>2c61a5d4-6ae6-4709-adef-d5be4830f84b</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentResults" Version="3.15.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
+	<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.0" />
+	<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
   </ItemGroup>
 
 </Project>
